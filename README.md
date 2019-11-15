@@ -1,2 +1,1 @@
-# cockpit-whm
-cPanel/WHM login module for cockpit
+This is an extremely rough WHM login module for cockpit.  Its based on the sample pinger code.

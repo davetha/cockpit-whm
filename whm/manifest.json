@@ -1,0 +1,13 @@
+{
+    "version": 0,
+
+    "tools": {
+        "WHM Login": {
+            "label": "WHM Login",
+            "path": "whm.html"
+        }
+    },
+
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval'"
+}
+

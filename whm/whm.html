@@ -1,0 +1,52 @@
+<head>
+    <title>Run WHM login</title>
+    <meta charset="utf-8">
+    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <script src="../base1/jquery.js"></script>
+    <script src="../base1/cockpit.js"></script>
+</head>
+<body>
+    <div class="container-fluid" style='max-width: 800px'>
+        <table class="cockpit-form-table">
+            <tr>
+                <td><button class="btn btn-default btn-primary" id="run">run</button></td>
+		<td><span id="result"></span></td>
+            </tr>
+        </table>
+        <p>
+	    <p id="output"></p>
+        </p>
+    </div>
+
+    <script>
+        var output = $("#output");
+        var result = $("#result");
+
+        $("#run").on("click", run_run);
+
+        function run_run() {
+            var proc = cockpit.spawn(["/usr/sbin/whmapi1", "create_user_session", "user=root", "service=whostmgrd"]);
+            proc.done(run_success);
+            proc.stream(run_output);
+            proc.fail(run_fail);
+
+            result.empty();
+            output.empty();
+        }
+
+        function run_success() {
+            result.css("color", "green");
+            result.text("success");
+        }
+
+        function run_fail() {
+            result.css("color", "red");
+            result.text("fail");
+        }
+
+        function run_output(data) {
+            output.html('<a target=_blank href="' + data.match(/https?:\S+/) + '">WHM Link</a>');
+        }
+    </script>
+</body>
+</html>
